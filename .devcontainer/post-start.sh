@@ -2,7 +2,7 @@
 # Plugin specific post-start.sh script.
 
 CFG_FILE="./.devcontainer/pretalx.cfg"
-TEMPLATE_FILE="./.decontainer/pretalx.cfg.template"
+TEMPLATE_FILE="./.devcontainer/pretalx.cfg.template"
 
 GREEN="\033[1;32m"
 YELLOW="\033[1;33m"
@@ -19,10 +19,7 @@ else
     echo "${GREEN}⚡ Created '$CFG_FILE' from template.${RESET}"
   else
     echo "${RED}✖ Template file '$TEMPLATE_FILE' not found. Cannot create '$CFG_FILE'.${RESET}"
-    exit 2
+    exit 1
   fi
 fi
 
-# Finish with a non-zero exit code to run default post-start.sh script.
-# In every other case, please ensure proper error handling to avoid failing with a non-zero exit code.
-exit 1;
