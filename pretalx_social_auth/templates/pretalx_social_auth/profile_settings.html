@@ -1,16 +1,25 @@
 {% load i18n %}
 <div>
-    <h4>{% translate "Social Login Connections" %}</h4>
-
-    {% for provider, connection in associated_accounts %}
-        <div class="row">
-
-            Connected to {{ provider }}
-            <div class="col-md-4 flip ml-auto">
-                <a class="btn btn-block btn-danger btn-lg">
-                    Disconnect
-                </a>
-            </div>
+    <fieldset class="m-2">
+        <legend>{% translate "Social Login Connections" %}</legend>
+        <div class="mb-4">
+            <p>{% translate "You have connected the following social accounts to your profile:" %}</p>
+            {% if associated_accounts %}
+                <div class="row">
+                    <ul>
+                        {% for provider_display_name, user_social_account in associated_accounts %}
+                            <li>
+                                {{ provider_display_name }} ({{ user_social_account.uid }})
+                                <form method="post" action="{% url 'plugins:pretalx_social_auth:disconnect' user_social_account.provider %}" style="display: inline;">
+                                    <button type="submit" class="btn btn-link p-0 align-baseline">{% translate "Disconnect" %}</button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <p>{% translate "You don't have any API tokens yet." %}</p>
+            {% endif %}
         </div>
-    {% endfor %}
+    </fieldset>
 </div>

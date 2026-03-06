@@ -18,9 +18,6 @@ In your `pretalx.cfg` file, add all the auth backends you need as a comma-separa
 Example:
 
 ```ini
-[project.entry-points."pretalx.plugin"]
-pretalx_social_auth = "pretalx_social_auth:PretalxPluginMeta"
-
 [authentication]
 additional_auth_backends=social_core.backends.microsoft.MicrosoftOAuth2,social_core.backends.open_id.OpenIdAuth
 
@@ -34,6 +31,39 @@ Instructions on adding custom backends will be added in the future.
 Due to how Social Auth is configured with API keys in `settings.py`, this doesn't support configuring providers (backends) on a per-event basis. This means particular care should be taken where custom event domains are in use, as some providers require a different API key per domain (or adding valid redirect URLs).
 
 I initially looked into using [django-allauth](https://github.com/pennersr/django-allauth) instead, which allows configuring providers in the database on a per-site basis, but it also replaces the full auth model, so would be more difficult to make into a plugin!
+
+## Email-based Account Linking
+
+When a user attempts to log in via SSO for the first time, the plugin checks if a user with the same email address already exists in the database. The behavior in this situation is controlled by the **Trust IDP Emails** setting, which can be configured per event in the plugin settings.
+
+### Trust IDP Emails Setting
+
+This setting controls whether the operator trusts all configured identity providers (IDPs) to authenticate users:
+
+- **Enabled (Trust IDPs)**: Users logging in via SSO for the first time will be automatically linked to existing accounts with the same email address. This provides a seamless experience when users already have an account and want to use SSO.
+
+- **Disabled (Don't Trust IDPs - Default)**: SSO login will be rejected if an account with that email already exists. The user will be shown an error message instructing them to log in with their existing credentials first, then connect their social account from their profile settings.
+
+### Security Considerations
+
+The default is **disabled** for security reasons:
+
+- It prevents unauthorized access if an attacker compromises an email account and creates a social login with a provider
+- It ensures explicit user consent before linking accounts
+- It's safer when you cannot fully trust all configured identity providers
+
+Enable this setting only when:
+
+- You fully trust all configured identity providers to properly verify email addresses
+- Your IDPs enforce email verification
+- You want to prioritize user convenience over strict account separation
+
+### Configuring the Setting
+
+1. Navigate to your event's settings in the pretalx organizer interface
+2. Go to "pretalx Social Auth plugin" in the settings menu
+3. Toggle the "Trust IDP emails" checkbox according to your security requirements
+4. Save the settings
 
 ## Development setup
 
