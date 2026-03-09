@@ -34,15 +34,15 @@ I initially looked into using [django-allauth](https://github.com/pennersr/djang
 
 ## Email-based Account Linking
 
-When a user attempts to log in via SSO for the first time, the plugin checks if a user with the same email address already exists in the database. The behavior in this situation is controlled by the **Trust IDP Emails** setting, which can be configured per event in the plugin settings.
+When a user attempts to log in via SSO for the first time, the plugin checks if a user with the same email address already exists in the database. The behavior in this situation is controlled by the **TRUST_IDP_EMAILS** global setting.
 
-### Trust IDP Emails Setting
+### TRUST_IDP_EMAILS Setting
 
 This setting controls whether the operator trusts all configured identity providers (IDPs) to authenticate users:
 
-- **Enabled (Trust IDPs)**: Users logging in via SSO for the first time will be automatically linked to existing accounts with the same email address. This provides a seamless experience when users already have an account and want to use SSO.
+- **Disabled (Default - Secure)**: Users logging in via SSO for the first time will be rejected if an account with that email already exists. The user will be shown an error message instructing them to log in with their existing credentials first, then connect their social account from their profile settings.
 
-- **Disabled (Don't Trust IDPs - Default)**: SSO login will be rejected if an account with that email already exists. The user will be shown an error message instructing them to log in with their existing credentials first, then connect their social account from their profile settings.
+- **Enabled (Trust IDPs)**: Users logging in via SSO for the first time will be automatically linked to existing accounts with the same email address. This provides a seamless experience when users already have an account and want to use SSO.
 
 ### Security Considerations
 
@@ -58,12 +58,16 @@ Enable this setting only when:
 - Your IDPs enforce email verification
 - You want to prioritize user convenience over strict account separation
 
-### Configuring the Setting
+### Configuration
 
-1. Navigate to your event's settings in the pretalx organizer interface
-2. Go to "pretalx Social Auth plugin" in the settings menu
-3. Toggle the "Trust IDP emails" checkbox according to your security requirements
-4. Save the settings
+This is a global setting configured in your `pretalx.cfg` file. Add it to the `[plugin:pretalx_social_auth]` section:
+
+```ini
+[plugin:pretalx_social_auth]
+TRUST_IDP_EMAILS=true
+```
+
+The current configuration and list of enabled identity providers can be viewed in the organizer interface under "pretalx Social Auth plugin Settings".
 
 ## Development setup
 

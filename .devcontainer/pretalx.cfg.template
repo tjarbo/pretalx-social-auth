@@ -14,3 +14,4 @@ SOCIAL_AUTH_OIDC_OIDC_ENDPOINT =http://localhost:9400
 SOCIAL_AUTH_OIDC_KEY=local_client_id
 SOCIAL_AUTH_OIDC_SECRET=local_client_secret
 BACKEND_NAME_MAPPING={ "oidc": "Development OIDC" }
+TRUST_IDP_EMAILS=True
