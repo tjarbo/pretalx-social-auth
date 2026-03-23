@@ -66,22 +66,6 @@ Semantic release determines the version bump from commit messages. Use the follo
 | `feat!:` / `BREAKING CHANGE:` | Major        | `feat!: remove deprecated pipeline hook` |
 | `chore:`, `docs:`, `style:`, `refactor:`, `test:` | None | `docs: update README` |
 
-### Setup required
-
-The CD pipeline uses the built-in `GITHUB_TOKEN` (no PAT needed) and [PyPI Trusted Publishing](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/) (no `PYPI_TOKEN` needed).
-
-Before the first release, configure a **Trusted Publisher** on PyPI:
-
-1. Log in to [pypi.org](https://pypi.org) and navigate to the `pretalx-sso` project.
-2. Go to **Managing → Publishing** and add a new trusted publisher with these values:
-   - **Owner**: `tjarbo`
-   - **Repository**: `pretalx-social-auth`
-   - **Workflow filename**: `cd.yml`
-   - **Environment**: leave blank for the `prerelease` job; set `release` for the `stable-release` job
-3. Create a **`release` GitHub Environment** (Settings → Environments) to add an optional approval gate before stable releases are published.
-
-After this one-time setup, the pipeline runs fully automatically without any secrets.
-
 ## Checks
 
 This plugin has CI set up to enforce a few code style rules. To check locally, you need these packages installed::
