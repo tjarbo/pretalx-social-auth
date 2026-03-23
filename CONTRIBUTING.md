@@ -39,6 +39,44 @@ After your environment is ready, please follow these to little steps to start co
   * Password: pretalx
 * An fake IDP is listening on port [`:9400`](http://localhost:9400) and is configured to be used via OIDC.
 
+## Releasing
+
+This project uses [python-semantic-release](https://python-semantic-release.readthedocs.io/) and [Conventional Commits](https://www.conventionalcommits.org/) to automate versioning and publishing. **You do not need to manually bump versions or create tags.**
+
+### Branch strategy
+
+| Branch    | What happens on push                                                                      |
+|-----------|-------------------------------------------------------------------------------------------|
+| `main`    | A pre-release is created and published to PyPI (e.g. `1.2.0-alpha.1`).                   |
+| `release` | A stable release is created and published to PyPI (e.g. `1.2.0`).                        |
+
+### How a release is made
+
+1. **Merge to `main`** – the CD pipeline runs `python-semantic-release`, which inspects commit messages since the last release, determines the next version following [semver](https://semver.org/), commits the version bump, creates a Git tag, publishes a GitHub Release, and uploads the built package to PyPI as a **pre-release**.
+2. **Promote to `release`** – once the pre-release has been tested and approved, merge `main` into the `release` branch. The same pipeline runs again and publishes the same version as a **stable release** on PyPI.
+
+### Commit message format
+
+Semantic release determines the version bump from commit messages. Use the following prefixes:
+
+| Prefix            | Version bump | Example                                      |
+|-------------------|-------------|----------------------------------------------|
+| `fix:`            | Patch        | `fix: handle missing config key gracefully`  |
+| `feat:`           | Minor        | `feat: add GitHub OAuth backend support`     |
+| `feat!:` / `BREAKING CHANGE:` | Major        | `feat!: remove deprecated pipeline hook` |
+| `chore:`, `docs:`, `style:`, `refactor:`, `test:` | None | `docs: update README` |
+
+### Required secrets
+
+The following secrets must be configured in the GitHub repository settings (under **Settings → Secrets and variables → Actions**) for the CD pipeline to work:
+
+| Secret       | Description                                                                 |
+|--------------|-----------------------------------------------------------------------------|
+| `GH_TOKEN`   | A GitHub Personal Access Token (classic) with `repo` and `workflow` scopes. Needed to push version-bump commits and create GitHub Releases on protected branches. |
+| `PYPI_TOKEN` | An API token from [pypi.org](https://pypi.org) scoped to the `pretalx-sso` project. |
+
+A **`release` GitHub Environment** (Settings → Environments) is recommended to add an approval gate before stable releases are published.
+
 ## Checks
 
 This plugin has CI set up to enforce a few code style rules. To check locally, you need these packages installed::
