@@ -4,13 +4,13 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-import pretalx_social_auth.storage
+import pretalx_sso.storage
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("pretalx_social_auth", "0001_initial"),
+        ("pretalx_sso", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ("data", models.JSONField(default=dict)),
                 ("timestamp", models.DateTimeField(auto_now_add=True, db_index=True)),
             ],
-            bases=(models.Model, pretalx_social_auth.storage.DjangoPartialMixin),
+            bases=(models.Model, pretalx_sso.storage.DjangoPartialMixin),
         ),
         migrations.CreateModel(
             name="Association",
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
             options={
                 "unique_together": {("server_url", "handle")},
             },
-            bases=(models.Model, pretalx_social_auth.storage.DjangoAssociationMixin),
+            bases=(models.Model, pretalx_sso.storage.DjangoAssociationMixin),
         ),
         migrations.CreateModel(
             name="Code",
@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
             options={
                 "unique_together": {("email", "code")},
             },
-            bases=(models.Model, pretalx_social_auth.storage.DjangoCodeMixin),
+            bases=(models.Model, pretalx_sso.storage.DjangoCodeMixin),
         ),
         migrations.CreateModel(
             name="Nonce",
@@ -88,7 +88,7 @@ class Migration(migrations.Migration):
             options={
                 "unique_together": {("server_url", "timestamp", "salt")},
             },
-            bases=(models.Model, pretalx_social_auth.storage.DjangoNonceMixin),
+            bases=(models.Model, pretalx_sso.storage.DjangoNonceMixin),
         ),
         migrations.CreateModel(
             name="UserSocialAuth",
@@ -116,6 +116,6 @@ class Migration(migrations.Migration):
             options={
                 "unique_together": {("provider", "uid")},
             },
-            bases=(models.Model, pretalx_social_auth.storage.DjangoUserMixin),
+            bases=(models.Model, pretalx_sso.storage.DjangoUserMixin),
         ),
     ]

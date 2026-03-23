@@ -33,11 +33,11 @@ ASSOCIATION_HANDLE_LENGTH = getattr(
 )
 
 
-class SocialAuthSettings(models.Model):
+class SingleSignOnSettings(models.Model):
     event = models.OneToOneField(
         to="event.Event",
         on_delete=models.CASCADE,
-        related_name="pretalx_social_auth_settings",
+        related_name="pretalx_sso_settings",
     )
     some_setting = models.CharField(max_length=10, default="A")
 

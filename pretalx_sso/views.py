@@ -11,17 +11,17 @@ from social_core.actions import do_auth, do_complete, do_disconnect
 
 from .utils import all_backends, backend_friendly_name, maybe_require_post, psa
 
-NAMESPACE = "plugins:pretalx_social_auth"
+NAMESPACE = "plugins:pretalx_sso"
 
 # Calling `session.set_expiry(None)` results in a session lifetime equal to
 # platform default session lifetime.
 DEFAULT_SESSION_TIMEOUT = None
 
 
-# class SocialAuthSettingsView(PermissionRequired, TemplateView):
-class SocialAuthSettingsView(TemplateView):
+# class SingleSignOnSettingsView(PermissionRequired, TemplateView):
+class SingleSignOnSettingsView(TemplateView):
     permission_required = "event.update_event"
-    template_name = "pretalx_social_auth/settings.html"
+    template_name = "pretalx_sso/settings.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

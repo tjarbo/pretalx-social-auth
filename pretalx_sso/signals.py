@@ -9,18 +9,18 @@ from .utils import all_backends, backend_friendly_name, user_backends
 
 
 @receiver(nav_event_settings)
-def pretalx_social_auth_settings(sender, request, **kwargs):
+def pretalx_sso_settings(sender, request, **kwargs):
     if not request.user.has_perm("orga.change_settings", request.event):
         return []
     return [
         {
             "label": "pretalx Social Auth plugin",
             "url": reverse(
-                "plugins:pretalx_social_auth:settings",
+                "plugins:pretalx_sso:settings",
                 kwargs={"event": request.event.slug},
             ),
             "active": request.resolver_match.url_name
-            == "plugins:pretalx_social_auth:settings",
+            == "plugins:pretalx_sso:settings",
         }
     ]
 
@@ -39,7 +39,7 @@ def render_login_auth_options(sender, request, next_url=None, **kwargs):
     if next_path:
         context["url_params"] = f"?next={next_path}"
 
-    template = get_template("pretalx_social_auth/login.html")
+    template = get_template("pretalx_sso/login.html")
     html = template.render(context=context, request=request)
     return html
 
@@ -52,7 +52,7 @@ def render_user_options_backends(sender, user, **kwargs):
         (backend_friendly_name(assoc.provider), assoc)
         for assoc in user_backend_data["associated"]
     ]
-    template = get_template("pretalx_social_auth/profile_settings.html")
+    template = get_template("pretalx_sso/profile_settings.html")
     html = template.render(context=context)
     return html
 

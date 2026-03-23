@@ -4,13 +4,13 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
-      - 'pretalx_social_auth/locale/**'
-      - 'pretalx_social_auth/static/**'
+      - 'pretalx_sso/locale/**'
+      - 'pretalx_sso/static/**'
   pull_request:
     branches: [ main ]
     paths-ignore:
-      - 'pretalx_social_auth/locale/**'
-      - 'pretalx_social_auth/static/**'
+      - 'pretalx_sso/locale/**'
+      - 'pretalx_sso/static/**'
 
 jobs:
   isort:

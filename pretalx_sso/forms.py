@@ -1,15 +1,15 @@
 from i18nfield.forms import I18nModelForm
 
-from .models import SocialAuthSettings
+from .models import SingleSignOnSettings
 
 
-class SocialAuthSettingsForm(I18nModelForm):
+class SignleSignOnSettingsForm(I18nModelForm):
 
     def __init__(self, *args, event=None, **kwargs):
-        self.instance, _ = SocialAuthSettings.objects.get_or_create(event=event)
+        self.instance, _ = SingleSignOnSettings.objects.get_or_create(event=event)
         super().__init__(*args, **kwargs, instance=self.instance, locales=event.locales)
 
     class Meta:
-        model = SocialAuthSettings
+        model = SingleSignOnSettings
         fields = ("some_setting",)
         widgets = {}

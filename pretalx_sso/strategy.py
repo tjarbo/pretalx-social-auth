@@ -44,7 +44,7 @@ DEFAULT_SETTINGS = {
         # there's any collision.
         'social_core.pipeline.user.get_username',
         # CUSTOM: Check if we should associate based on email and trust settings
-        'pretalx_social_auth.pipeline.associate_by_email_if_trusted',
+        'pretalx_sso.pipeline.associate_by_email_if_trusted',
         # Create a user account if we haven't found one yet.
         'social_core.pipeline.user.create_user',
         # Create the record that associates the social account with the user.
@@ -58,7 +58,7 @@ DEFAULT_SETTINGS = {
 }
 
 plugin_cfg_settings = getattr(settings, "PLUGIN_SETTINGS", {}).get(
-    "pretalx_social_auth", {}
+    "pretalx_sso", {}
 )
 plugin_settings = DEFAULT_SETTINGS.copy()
 # cfg file makes all settings lowercase, so we need to convert them back to uppercase, and merge them with the defaults

@@ -1,6 +1,6 @@
-recursive-include pretalx_social_auth/static *
-recursive-include pretalx_social_auth/templates *
-exclude pretalx_social_auth/locale/django.pot
-recursive-include pretalx_social_auth/locale *
-recursive-include pretalx_social_auth *.py
+recursive-include pretalx_sso/static *
+recursive-include pretalx_sso/templates *
+exclude pretalx_sso/locale/django.pot
+recursive-include pretalx_sso/locale *
+recursive-include pretalx_sso *.py
 include Makefile

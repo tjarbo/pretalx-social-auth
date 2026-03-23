@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="SocialAuthSettings",
+            name="SingleSignOnSettings",
             fields=[
                 (
                     "id",
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                     "event",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="pretalx_social_auth_settings",
+                        related_name="pretalx_sso_settings",
                         to="event.event",
                     ),
                 ),

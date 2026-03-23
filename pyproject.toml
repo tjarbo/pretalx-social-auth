@@ -1,7 +1,7 @@
 [project]
-name = "pretalx-social-auth"
+name = "pretalx-sso"
 dynamic = ["version"]
-description = "Single sign-on for pretalx using based on social-auth-app-django"
+description = "Single sign-on for pretalx based on social-auth-app-django"
 readme = "README.md"
 license = "BSD-3-Clause"
 keywords = ["pretalx"]
@@ -10,17 +10,17 @@ authors = [
 ]
 maintainers = []
 
-dependencies = [
+dependencies = [ 
   "django>=3.2",
   "social-auth-core>=4.4.1"
 ]
 
 [project.urls]
-homepage = "https://github.com/adamskrz/pretalx-social-auth"
-repository = "https://github.com/adamskrz/pretalx-social-auth.git"
+homepage = "https://github.com/tjarbo/pretalx-single-sign-on"
+repository = "https://github.com/tjarbo/pretalx-single-sign-on.git"
 
 [project.entry-points."pretalx.plugin"]
-pretalx_social_auth = "pretalx_social_auth:PretalxPluginMeta"
+pretalx_sso = "pretalx_sso:PretalxPluginMeta"
 
 [build-system]
 build-backend = "setuptools.build_meta"
@@ -30,7 +30,7 @@ requires = ["setuptools"]
 include-package-data = true
 
 [tool.setuptools.dynamic]
-version = {attr = "pretalx_social_auth.__version__"}
+version = {attr = "pretalx_sso.__version__"}
 
 [tool.setuptools.packages.find]
 include = ["pretalx*"]
