@@ -1,16 +1,14 @@
 [project]
 name = "pretalx-social-auth"
 dynamic = ["version"]
-description = "pretalx plugin for Python Social Auth"
-readme = "README.rst"
+description = "Single sign-on for pretalx using based on social-auth-app-django"
+readme = "README.md"
 license = "BSD-3-Clause"
 keywords = ["pretalx"]
 authors = [
-  {name = "Adam Skrzymowski", email = "adam.skrzymowski@gmail.com"},
+  {name = "Tjark"},
 ]
-maintainers = [
-  {name = "Adam Skrzymowski", email = "adam.skrzymowski@gmail.com"},
-]
+maintainers = []
 
 dependencies = [
   "django>=3.2",
