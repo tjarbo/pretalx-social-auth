@@ -37,3 +37,17 @@ include = ["pretalx*"]
 
 [tool.check-manifest]
 ignore = [".*"]
+
+[tool.semantic_release]
+version_variables = ["pretalx_sso/__init__.py:__version__"]
+build_command = "pip install build && python -m build"
+tag_format = "v{version}"
+
+[tool.semantic_release.branches.main]
+match = "main"
+prerelease_token = "alpha"
+prerelease = true
+
+[tool.semantic_release.branches.release]
+match = "release"
+prerelease = false

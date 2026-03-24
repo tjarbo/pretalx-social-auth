@@ -54,6 +54,19 @@ Enable this setting only when:
 - Your IDPs enforce email verification
 - You want to prioritize user convenience over strict account separation
 
+## Release Model
+
+This project follows a **trunk-based development** workflow with two persistent branches:
+
+| Branch    | Purpose                                                                                     | Release type               |
+|-----------|---------------------------------------------------------------------------------------------|----------------------------|
+| `main`    | All merged work lands here. Every push triggers an automatic **pre-release** on PyPI.       | Pre-release (e.g. `1.2.0-alpha.1`) |
+| `release` | Tested, stable code. Every push triggers an automatic **stable release** on PyPI.           | Stable release (e.g. `1.2.0`)      |
+
+Pre-releases are published to PyPI and can be installed with `pip install --pre pretalx-sso`. Stable releases are the default when running `pip install pretalx-sso`.
+
+Version numbers and changelogs are managed automatically by [python-semantic-release](https://python-semantic-release.readthedocs.io/) based on [Conventional Commits](https://www.conventionalcommits.org/). Please follow the conventional commit format in your pull request titles.
+
 ## License
 
 This plugin is licensed under the BSD-3-Clause License. See the [LICENSE](LICENSE) file for details.
