@@ -8,6 +8,21 @@ It is of fork of [pretalx-social-auth](https://github.com/adamskrz/pretalx-socia
 
 ![Screenshots of pretalx orga login screen and CFP account step with extra providers](.github/assets/login_screenshots.png)
 
+## Installation
+
+You can install the plugin from PyPI or directly from GitHub.
+
+```bash
+# Stable release from PyPI
+pip install pretalx-sso
+
+# Pre-release from PyPI
+# pip install --pre pretalx-sso
+
+# Pre-release from Git (example tag)
+# pip install git+https://github.com/tjarbo/pretalx-social-auth.git@v1.2.0-alpha.1
+```
+
 ## Configuration
 
 In your `pretalx.cfg` file, add all the auth backends you need as a comma-separated list. Then, add the backend-specific settings to the `[plugin:pretalx_sso]` section. You can find the backend name and required settings in the [python-social-auth documentation](https://python-social-auth.readthedocs.io/en/latest/backends/index.html).
